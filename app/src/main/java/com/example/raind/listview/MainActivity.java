@@ -22,13 +22,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] names={"李一","李二","李三","李四"};
-        String[] bjs={"软件工程 1班","软件工程 2班","计科 1班","计科 5班"};
-        String[] nums={"20160111","20160123","20160114","20160132"};
+        //定于ListView中TextView的数据
+        String[] names={"李一","李二","李三","李四","李五","李六","李七"};
+
+        String[] bjs={"软工1401班","软工1402班",
+                "计科1401班","计科1402班",
+                "网工1401班","网工1402班","网工1403班"};
+
+        String[] nums={"20160111","20160122","20160113","20160134","20160135","20160136","20160137"};
+
 
         List<Map<String,Object>> items=new ArrayList<Map<String,Object>>();
 
-        for(int i=0;i<nums.length;i++) {
+        for(int i=0;i<names.length;i++) {
             Map<String,Object> item=new HashMap<String,Object>();
             item.put(NAME, names[i]);
             item.put(BJ, bjs[i]);
@@ -36,11 +42,16 @@ public class MainActivity extends AppCompatActivity {
             items.add(item);
         }
 
-        SimpleAdapter adapter=new SimpleAdapter(this,items,R.layout.item,new String[]{NAME,BJ,NUM},
+        //创建适配器
+        //items表示显示的数据，一个Map为一行，List<Map>表示多行
+        //R.layout.item表示一个item的布局
+        //new String[]{NAME,BJ,NUM},表示将key="NAME"的值映射到R.id.textViewName上
+        SimpleAdapter adapter=new SimpleAdapter(this,items,R.layout.item,
+                new String[]{NAME,BJ,NUM},
                 new int[]{R.id.textViewName,R.id.textViewBj,R.id.textViewNum});
 
         ListView list=(ListView)findViewById(R.id.list);
-
+        //设置适配器
         list.setAdapter(adapter);
 
 
